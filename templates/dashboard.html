@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel | Estanco Control</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark small">EC</div><span>Estanco<br><strong>Control</strong></span></div>
+      <nav><a href="#resumen" class="nav-link active">▦ <span>Resumen</span></a><a href="#inventario" class="nav-link">▤ <span>Inventario</span></a><a href="#ventas" class="nav-link">↗ <span>Ventas</span></a></nav>
+      <div class="sidebar-footer"><div class="avatar">{{ username[:1].upper() }}</div><div><strong>{{ username }}</strong><small>Administrador</small></div><form action="/logout" method="post"><button title="Cerrar sesión" class="icon-button">↪</button></form></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><div><p class="eyebrow">PANEL DE ADMINISTRACIÓN</p><h1>Resumen del negocio</h1></div><div class="date-chip"><span class="status-dot"></span><span id="today-label"></span></div></header>
+      <section id="resumen" class="content-section">
+        <div class="section-heading"><div><h2>Resumen de <span id="month-title"></span></h2><p class="muted">Una vista rápida de la operación de tu estanco.</p></div><label class="month-picker">Mes <input type="month" id="month-filter"></label></div>
+        <div class="metric-grid"><article class="metric-card highlight"><div class="metric-icon">$</div><span>Ganancia del mes</span><strong id="metric-profit">$0,00</strong><small id="profit-caption">Ventas menos costo de producto</small></article><article class="metric-card"><div class="metric-icon pale-blue">↗</div><span>Ventas del mes</span><strong id="metric-revenue">$0,00</strong><small id="sales-caption">0 transacciones</small></article><article class="metric-card"><div class="metric-icon pale-orange">▤</div><span>Unidades vendidas</span><strong id="metric-units">0</strong><small>Productos que salieron</small></article><article class="metric-card"><div class="metric-icon pale-red">!</div><span>Stock bajo</span><strong id="metric-low-stock">0</strong><small>Productos para reponer</small></article></div>
+      </section>
+      <section id="inventario" class="content-section panel"><div class="section-heading"><div><h2>Inventario</h2><p class="muted">Controla existencias, costos y precios de venta.</p></div><button class="button primary" id="new-product-button">+ Nuevo producto</button></div><div id="inventory-alert" class="alert hidden"></div><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Categoría</th><th>Precio compra</th><th>Precio venta</th><th>Margen</th><th>Stock</th><th></th></tr></thead><tbody id="products-table"><tr><td colspan="7" class="empty">Cargando inventario...</td></tr></tbody></table></div></section>
+      <section id="ventas" class="content-section panel"><div class="section-heading"><div><h2>Registrar venta</h2><p class="muted">El stock se descuenta automáticamente al guardar.</p></div></div><form id="sale-form" class="sale-form"><label>Producto<select id="sale-product" required><option value="">Selecciona un producto</option></select></label><label>Cantidad<input type="number" id="sale-quantity" min="1" value="1" required></label><div class="sale-preview"><span>Total estimado</span><strong id="sale-total">$0,00</strong></div><button class="button primary" type="submit">Registrar venta</button></form><div id="sale-alert" class="alert hidden"></div><div class="sales-heading"><h3>Ventas de <span id="sales-month-title"></span></h3></div><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Producto</th><th>Unidades</th><th>Total</th><th>Ganancia</th></tr></thead><tbody id="sales-table"><tr><td colspan="5" class="empty">Cargando ventas...</td></tr></tbody></table></div></section>
+    </main>
+  </div>
+  <dialog id="product-dialog"><form method="dialog" id="product-form" class="modal-form"><div class="modal-heading"><div><p class="eyebrow">INVENTARIO</p><h2 id="modal-title">Nuevo producto</h2></div><button value="cancel" class="close-button">×</button></div><input type="hidden" id="product-id"><div class="form-grid"><label>Nombre del producto<input id="product-name" required placeholder="Ej. Cigarrillos Marlboro"></label><label>Categoría<input id="product-category" value="General" placeholder="Ej. Cigarrillos"></label><label>Precio de compra ($)<input type="number" id="product-purchase" min="0" step="0.01" required></label><label>Precio de venta ($)<input type="number" id="product-sale" min="0" step="0.01" required></label><label>Stock actual<input type="number" id="product-stock" min="0" step="1" required></label><label>Alertar cuando llegue a<input type="number" id="product-min-stock" min="0" step="1" value="5" required></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Cancelar</button><button value="default" class="button primary">Guardar producto</button></div></form></dialog>
+  <script src="/static/app.js"></script>
+</body>
+</html>
+

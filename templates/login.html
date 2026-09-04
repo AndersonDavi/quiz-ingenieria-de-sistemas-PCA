@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceso | Estanco Control</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="auth-page">
+  <main class="login-card">
+    <div class="brand-mark">EC</div>
+    <p class="eyebrow">CONTROL DE ESTANCO</p>
+    <h1>Bienvenido de nuevo</h1>
+    <p class="muted">Administra tu inventario y tus ventas desde un solo lugar.</p>
+    {% if error %}<div class="alert error">{{ error }}</div>{% endif %}
+    <form action="/login" method="post" class="stack-form">
+      <label>Usuario<input name="username" autocomplete="username" required autofocus></label>
+      <label>Contraseña<input type="password" name="password" autocomplete="current-password" required></label>
+      <button class="button primary" type="submit">Ingresar al panel <span>→</span></button>
+    </form>
+    <p class="login-hint">Cuenta inicial: <strong>admin</strong> / <strong>admin123</strong><br>Configúrala con <code>ADMIN_USERNAME</code> y <code>ADMIN_PASSWORD</code>.</p>
+  </main>
+</body>
+</html>
+
